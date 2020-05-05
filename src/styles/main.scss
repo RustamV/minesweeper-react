@@ -1,0 +1,81 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#game{
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    grid-gap: 20px;
+}
+.board{
+    display: grid;
+    grid-template-columns: repeat(9, 25px);
+    grid-template-rows: repeat(9, 25px);
+}
+.board .cell{
+    background-color: #ddd;
+    border-top: 1px solid #afffff;
+    border-left: 1px solid #afffff;
+    border-bottom: 1px solid #404e4e;
+    border-right: 1px solid #404e4e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.board img{
+    width: 100%;
+}
+.board .cell.checked{
+    background-color: #ffffff !important;
+    
+}
+#controls{
+    width: 40px;
+    background-color: cadetblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+#controls>:nth-child(n){
+    height: 40px;
+    width: 40px;
+    background-color: #ddd;
+}
+#controls #number_of_mines{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#result{
+    height: 40px;
+    background-color: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.newGame {
+    background-image: url(../img/g0Hnvkk.jpg);
+    background-size: cover;
+    height: 50px;
+    width: 50px;
+}
+
+.boardWrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 300px;
+}
+
+.status {
+    height: 21px;
+}
