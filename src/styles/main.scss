@@ -7,65 +7,39 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #c5ccb8;
 }
-#game{
-    display: grid;
-    grid-template-columns: auto auto;
-    grid-template-rows: auto auto;
-    grid-gap: 20px;
+
+img {
+    display: block;
 }
+
+#root {
+    border: 10px solid #333343;
+    border-radius: 20px;
+}
+
 .board{
     display: grid;
-    grid-template-columns: repeat(9, 25px);
-    grid-template-rows: repeat(9, 25px);
+    position: relative;
+    border: 3px solid #333343;
 }
 .board .cell{
-    background-color: #ddd;
-    border-top: 1px solid #afffff;
-    border-left: 1px solid #afffff;
-    border-bottom: 1px solid #404e4e;
-    border-right: 1px solid #404e4e;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 .board img{
     width: 100%;
 }
 .board .cell.checked{
     background-color: #ffffff !important;
-    
-}
-#controls{
-    width: 40px;
-    background-color: cadetblue;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-#controls>:nth-child(n){
-    height: 40px;
-    width: 40px;
-    background-color: #ddd;
-}
-#controls #number_of_mines{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-#result{
-    height: 40px;
-    background-color: #ddd;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    cursor: initial;
 }
 
 .newGame {
-    background-image: url(../img/g0Hnvkk.jpg);
-    background-size: cover;
-    height: 50px;
-    width: 50px;
+    cursor: pointer;
 }
 
 .boardWrap {
@@ -73,9 +47,88 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    height: 300px;
+    gap: 20px;
+    padding: 20px;
+    border: 3px solid #5d6872;
+    border-radius: 8px;
 }
 
-.status {
-    height: 21px;
+.lose {
+    position: absolute;
+    top: calc(50% - 51px);
+    left: calc(50% - 186px);
+    box-shadow: 4px 4px 64px 2px rgba(34, 60, 80,  0.7);
+}
+
+.win {
+    position: absolute;
+    top: calc(50% - 51px);
+    left: calc(50% - 162px);
+    box-shadow: 4px 4px 64px 2px rgba(34, 60, 80,  0.7);
+}
+
+.select {
+
+    .select__control {
+        border-color: #333343;
+        border-width: 3px;
+        background-color: #c5ccb8;
+        box-shadow: none;
+        min-height: unset;
+        padding: 4px 7px;
+        cursor: pointer;
+
+        &:hover {
+            border-color: #333343;
+        }
+    }
+
+    .select__menu {
+        background-color: #c5ccb8;
+    }
+
+    .select__option {
+        padding: 2px 0;
+        display: flex;
+        justify-content: center;
+        cursor: pointer;
+
+        &--is-selected {
+            background-color:  #c5ccb8;
+            filter: brightness(0.9);
+        }
+
+        &--is-focused {
+            background-color:  #c5ccb8;
+            filter: brightness(0.9);
+        }
+
+        &:active {
+            background-color:  #c5ccb8;
+        }
+    }
+
+    .select__value-container {
+        padding: 0;
+    }
+
+    .select__single-value {
+        margin: 0;
+        transform: none;
+        position: unset;
+        top: unset;
+    }
+
+    .select__indicators {
+        padding-right: 6px;
+    }
+
+    .select__indicator {
+        color: #333343;
+        padding: 0;
+
+        &:hover {
+            color: #5d6872;
+        }
+    }
 }
