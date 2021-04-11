@@ -5,7 +5,6 @@ import select16 from "../img/16-select.png";
 import select25 from "../img/25-select.png";
 
 const SingleValue = ({ children, ...props }) => {
-    console.log(children);
     const getOptionImage = () => {
         switch (children) {
             case "9": {
@@ -27,7 +26,7 @@ const SingleValue = ({ children, ...props }) => {
 
     return (
         <ReactComponents.SingleValue {...props}>
-            <img src={optionImage} />
+            <img src={optionImage} alt="" />
         </ReactComponents.SingleValue>
     );
 };

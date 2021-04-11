@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import flag from "../img/flag.png";
 import cell from "../img/cell.png";
@@ -14,35 +14,14 @@ import eight from "../img/8.png";
 import mine from "../img/mine.png";
 
 export const Cell = (props) => {
-    const [cellState, setCellState] = useState({
-        isChecked: props.isChecked,
-        x: props.x,
-        y: props.y,
-        isBomb: false,
-        isFlag: props.isFlag,
-        num: props.num,
-        id: props.id,
-    });
-
-    useEffect(() => {
-        setCellState((prev) => {
-            return {
-                ...prev,
-                num: props.num,
-                isChecked: props.isChecked,
-                isFlag: props.isFlag,
-            };
-        });
-    }, [props]);
-
     const contextMenu = (e) => {
         e.preventDefault();
-        props.rightClick(cellState.x, cellState.y);
+        props.rightClick(props.x, props.y);
     };
 
     const createContent = () => {
-        if (cellState.isChecked) {
-            switch (cellState.num) {
+        if (props.isChecked) {
+            switch (props.num) {
                 case 1:
                     return <img src={one} alt="" />;
                 case 2:
@@ -59,23 +38,12 @@ export const Cell = (props) => {
                     return <img src={seven} alt="" />;
                 case 8:
                     return <img src={eight} alt="" />;
-                case 8:
-                case 9:
-                case 10:
-                case 11:
-                case 12:
-                case 13:
-                case 14:
-                case 15:
-                case 16:
-                case 17:
-                case 18:
-                case 19:
-                    return <img src={mine} alt="" />;
-                default:
+                case 0:
                     return <img src={zero} alt="" />;
+                default:
+                    return <img src={mine} alt="" />;
             }
-        } else if (cellState.isFlag) {
+        } else if (props.isFlag) {
             return <img src={flag} alt="" />;
         }
         return <img src={cell} alt="" />;
@@ -83,8 +51,8 @@ export const Cell = (props) => {
 
     return (
         <div
-            className={`cell ${cellState.isChecked && "checked"}`}
-            onClick={() => props.updateItem(cellState.x, cellState.y)}
+            className={`cell ${props.isChecked && "checked"}`}
+            onClick={() => props.updateItem(props.x, props.y)}
             onContextMenu={contextMenu}
         >
             {createContent()}

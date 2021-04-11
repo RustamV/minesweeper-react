@@ -27,7 +27,7 @@ const Option = ({ children, ...props }) => {
 
     return (
         <ReactComponents.Option {...props}>
-            <img src={optionImage} />
+            <img src={optionImage} alt="" />
         </ReactComponents.Option>
     );
 };
