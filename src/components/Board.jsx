@@ -5,6 +5,7 @@ import lose from "../img/lose.png";
 import happySmile from "../img/happySmile.png";
 import sadSmile from "../img/sadSmile.png";
 import Select from "./Select";
+import BombCount from "./BombCount";
 
 const options = [
     { id: 1, value: "9", count: 9, bombs: 10, label: "9" },
@@ -15,10 +16,11 @@ const options = [
 const Board = () => {
     const [boardState, setBoardState] = useState({
         cell: [],
-        count: 16,
-        bombs: 32,
+        count: 9,
+        bombs: 10,
         status: "",
         counter: 0,
+        bombCount: 10,
     });
 
     useEffect(() => {
@@ -35,8 +37,6 @@ const Board = () => {
     // }, [boardState]);
 
     const onChangeFieldSize = (option) => {
-        const newCells = createCells(option.count, option.bombs);
-        // console.table(option);
         setBoardState((prev) => {
             return {
                 ...prev,
@@ -45,6 +45,7 @@ const Board = () => {
                 counter: 0,
                 status: "",
                 bombs: option.bombs,
+                bombCount: option.bombs,
             };
         });
     };
@@ -66,8 +67,6 @@ const Board = () => {
                 };
             }
         }
-
-        // console.log(count);
 
         while (bombCount !== 0) {
             bombCount = random_bomb(cells, bombCount, count);
@@ -197,6 +196,7 @@ const Board = () => {
                         boardState.cell[y][x].num > 8
                             ? boardState.counter + 1
                             : boardState.counter,
+                    bombCount: boardState.bombCount - 1,
                 };
             });
         }
@@ -253,6 +253,7 @@ const Board = () => {
                 result: 0,
                 counter: 0,
                 status: "",
+                bombCount: boardState.bombs,
             };
         });
     };
@@ -272,6 +273,7 @@ const Board = () => {
                 onChange={onChangeFieldSize}
                 className="select"
             />
+            <BombCount bombCount={boardState.bombCount} />
             <div
                 className="board"
                 style={{
@@ -314,7 +316,6 @@ const randomInteger = (min, max) => {
 };
 
 const random_bomb = (matrix, bombCount, fieldSize) => {
-    // console.log(fieldSize);
     const xCoordinate = randomInteger(0, fieldSize - 1);
     const yCoordinate = randomInteger(0, fieldSize - 1);
     if (matrix[xCoordinate][yCoordinate] === 9) {
