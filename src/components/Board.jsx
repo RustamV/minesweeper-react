@@ -318,9 +318,7 @@ const randomInteger = (min, max) => {
 const random_bomb = (matrix, bombCount, fieldSize) => {
     const xCoordinate = randomInteger(0, fieldSize - 1);
     const yCoordinate = randomInteger(0, fieldSize - 1);
-    if (matrix[xCoordinate][yCoordinate] === 9) {
-        bombCount = random_bomb(matrix, bombCount);
-    } else {
+    if (matrix[xCoordinate][yCoordinate].num !== 9) {
         matrix[xCoordinate][yCoordinate].num = 9;
         bombCount--;
     }
