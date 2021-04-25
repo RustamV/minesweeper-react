@@ -6,6 +6,7 @@ import happySmile from "../img/happySmile.png";
 import sadSmile from "../img/sadSmile.png";
 import Select from "./Select";
 import BombCount from "./BombCount";
+import Timer from "./Timer";
 
 const options = [
     { id: 1, value: "9", count: 9, bombs: 10, label: "9" },
@@ -22,6 +23,7 @@ const Board = () => {
         counter: 0,
         bombCount: 10,
     });
+    const [time, setTime] = useState(0);
 
     useEffect(() => {
         setBoardState((prev) => {
@@ -32,9 +34,17 @@ const Board = () => {
         });
     }, []);
 
-    // useEffect(() => {
-    //     console.log(boardState);
-    // }, [boardState]);
+    useEffect(() => {
+        if (boardState.status === "") {
+            setBoardState((prev) => {
+                return {
+                    ...prev,
+                    status: "in-game",
+                };
+            });
+        }
+        console.log(boardState);
+    }, [boardState.status]);
 
     const onChangeFieldSize = (option) => {
         setBoardState((prev) => {
@@ -91,6 +101,7 @@ const Board = () => {
                 }
             }
         }
+
         return cells;
     };
 
@@ -274,6 +285,7 @@ const Board = () => {
                 className="select"
             />
             <BombCount bombCount={boardState.bombCount} />
+            <Timer status={boardState.status} setTime={setTime} time={time} />
             <div
                 className="board"
                 style={{
