@@ -1,20 +1,20 @@
 import Modal from "react-modal";
 import React from "react";
-import lose from "../img/lose.png";
+import win from "../../img/win.png";
 
-const LoseModal = ({ ...props }) => {
+const WinModal = ({ ...props }) => {
     return (
         <Modal
-            className="lose-modal modal"
+            className="win-modal modal"
             overlayClassName="modal__overlay"
             ariaHideApp={false}
             {...props}
         >
-            <div className="lose-modal__image">
-                <img src={lose} alt="" />
+            <div className="win-modal__image">
+                <img src={win} alt="" />
             </div>
         </Modal>
     );
 };
 
-export default LoseModal;
+export default WinModal;
