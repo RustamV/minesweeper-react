@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Cell from "./Cell";
-import win from "../img/win.png";
-import lose from "../img/lose.png";
 import happySmile from "../img/happySmile.png";
 import sadSmile from "../img/sadSmile.png";
-import Select from "./Select";
+import gearIcon from "../img/gear.png";
 import BombCount from "./BombCount";
 import Timer from "./Timer";
+import SettingsModal from "./SettingsModal";
+import WinModal from "./WinModal";
+import LoseModal from "./LoseModal";
 
 const options = [
-    { id: 1, value: "9", count: 9, bombs: 10, label: "9" },
+    { id: 1, value: "9", count: 9, bombs: 1, label: "9" },
     { id: 2, value: "16", count: 16, bombs: 32, label: "16" },
     { id: 3, value: "25", count: 25, bombs: 50, label: "25" },
 ];
@@ -18,12 +19,28 @@ const Board = () => {
     const [boardState, setBoardState] = useState({
         cell: [],
         count: 9,
-        bombs: 10,
+        bombs: 1,
         status: "",
         counter: 0,
         bombCount: 10,
     });
     const [time, setTime] = useState(0);
+    const [modalVisible, setModalVisible] = useState(false);
+    const [winModalVisible, setWinModalVisible] = useState(false);
+    const [loseModalVisible, setLoseModalVisible] = useState(false);
+
+    const onModalOpen = () => {
+        setModalVisible(true);
+    };
+    const onModalClose = () => {
+        setModalVisible(false);
+    };
+    const onWinModalClose = () => {
+        setWinModalVisible(false);
+    };
+    const onLoseModalClose = () => {
+        setLoseModalVisible(false);
+    };
 
     useEffect(() => {
         setBoardState((prev) => {
@@ -42,6 +59,12 @@ const Board = () => {
                     status: "in-game",
                 };
             });
+        }
+        if (boardState.status === "Вы выиграли!") {
+            setWinModalVisible(true);
+        }
+        if (boardState.status === "Вы проиграли!") {
+            setLoseModalVisible(true);
         }
         console.log(boardState);
     }, [boardState.status]);
@@ -271,21 +294,28 @@ const Board = () => {
 
     return (
         <div className="boardWrap">
-            <div className="newGame" onClick={startNewGame}>
-                {boardState?.status === "Вы проиграли!" ? (
-                    <img src={sadSmile} alt="" />
-                ) : (
-                    <img src={happySmile} alt="" />
-                )}
+            <div className="row row-1">
+                <BombCount bombCount={boardState.bombCount} />
+                <div className="newGame" onClick={startNewGame}>
+                    {boardState?.status === "Вы проиграли!" ? (
+                        <img src={sadSmile} alt="" />
+                    ) : (
+                        <img src={happySmile} alt="" />
+                    )}
+                </div>
+                <div onClick={() => onModalOpen()} className="gear">
+                    <img src={gearIcon} alt="" />
+                </div>
             </div>
-            <Select
-                defaultValue={options[0]}
-                options={options}
-                onChange={onChangeFieldSize}
-                className="select"
-            />
-            <BombCount bombCount={boardState.bombCount} />
-            <Timer status={boardState.status} setTime={setTime} time={time} />
+
+            <div className="row row-2">
+                <Timer
+                    status={boardState.status}
+                    setTime={setTime}
+                    time={time}
+                />
+            </div>
+
             <div
                 className="board"
                 style={{
@@ -308,17 +338,21 @@ const Board = () => {
                         />
                     );
                 })}
-                {boardState?.status === "Вы выиграли!" ? (
-                    <div className="win">
-                        <img src={win} alt="" />
-                    </div>
-                ) : null}
-                {boardState?.status === "Вы проиграли!" ? (
-                    <div className="lose">
-                        <img src={lose} alt="" />
-                    </div>
-                ) : null}
             </div>
+            <WinModal
+                isOpen={winModalVisible}
+                onRequestClose={() => onWinModalClose()}
+            />
+            <LoseModal
+                isOpen={loseModalVisible}
+                onRequestClose={() => onLoseModalClose()}
+            />
+            <SettingsModal
+                isOpen={modalVisible}
+                onRequestClose={() => onModalClose()}
+                options={options}
+                onChangeFieldSize={onChangeFieldSize}
+            />
         </div>
     );
 };
