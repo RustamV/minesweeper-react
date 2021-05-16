@@ -1,17 +1,17 @@
 import React from "react";
 
-import flag from "../img/flag.png";
-import cell from "../img/cell.png";
-import zero from "../img/0.png";
-import one from "../img/1.png";
-import two from "../img/2.png";
-import three from "../img/3.png";
-import four from "../img/4.png";
-import five from "../img/5.png";
-import six from "../img/6.png";
-import seven from "../img/7.png";
-import eight from "../img/8.png";
-import mine from "../img/mine.png";
+import flag from "../../img/flag.png";
+import cell from "../../img/cell.png";
+import zero from "../../img/0.png";
+import one from "../../img/1.png";
+import two from "../../img/2.png";
+import three from "../../img/3.png";
+import four from "../../img/4.png";
+import five from "../../img/5.png";
+import six from "../../img/6.png";
+import seven from "../../img/7.png";
+import eight from "../../img/8.png";
+import mine from "../../img/mine.png";
 
 export const Cell = (props) => {
     const contextMenu = (e) => {

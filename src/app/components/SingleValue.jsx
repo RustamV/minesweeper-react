@@ -1,8 +1,8 @@
 import { components as ReactComponents } from "react-select";
 import React from "react";
-import select9 from "../img/9-select.png";
-import select16 from "../img/16-select.png";
-import select25 from "../img/25-select.png";
+import select9 from "../../img/9-select.png";
+import select16 from "../../img/16-select.png";
+import select25 from "../../img/25-select.png";
 
 const SingleValue = ({ children, ...props }) => {
     const getOptionImage = () => {

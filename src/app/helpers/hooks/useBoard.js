@@ -1,46 +1,14 @@
-import React, { useEffect, useState } from "react";
-import Cell from "./Cell";
-import happySmile from "../img/happySmile.png";
-import sadSmile from "../img/sadSmile.png";
-import gearIcon from "../img/gear.png";
-import BombCount from "./BombCount";
-import Timer from "./Timer";
-import SettingsModal from "./SettingsModal";
-import WinModal from "./WinModal";
-import LoseModal from "./LoseModal";
+import { useEffect, useState } from "react";
 
-const options = [
-    { id: 1, value: "9", count: 9, bombs: 1, label: "9" },
-    { id: 2, value: "16", count: 16, bombs: 32, label: "16" },
-    { id: 3, value: "25", count: 25, bombs: 50, label: "25" },
-];
-
-const Board = () => {
+const useBoard = () => {
     const [boardState, setBoardState] = useState({
         cell: [],
         count: 9,
-        bombs: 1,
+        bombs: 10,
         status: "",
         counter: 0,
         bombCount: 10,
     });
-    const [time, setTime] = useState(0);
-    const [modalVisible, setModalVisible] = useState(false);
-    const [winModalVisible, setWinModalVisible] = useState(false);
-    const [loseModalVisible, setLoseModalVisible] = useState(false);
-
-    const onModalOpen = () => {
-        setModalVisible(true);
-    };
-    const onModalClose = () => {
-        setModalVisible(false);
-    };
-    const onWinModalClose = () => {
-        setWinModalVisible(false);
-    };
-    const onLoseModalClose = () => {
-        setLoseModalVisible(false);
-    };
 
     useEffect(() => {
         setBoardState((prev) => {
@@ -60,28 +28,9 @@ const Board = () => {
                 };
             });
         }
-        if (boardState.status === "Вы выиграли!") {
-            setWinModalVisible(true);
-        }
-        if (boardState.status === "Вы проиграли!") {
-            setLoseModalVisible(true);
-        }
-        console.log(boardState);
+        boardState.status === "win" && showBoard();
+        boardState.status === "lose" && showBoard();
     }, [boardState.status]);
-
-    const onChangeFieldSize = (option) => {
-        setBoardState((prev) => {
-            return {
-                ...prev,
-                count: option.count,
-                cell: createCells(option.count, option.bombs),
-                counter: 0,
-                status: "",
-                bombs: option.bombs,
-                bombCount: option.bombs,
-            };
-        });
-    };
 
     const createCells = (count, bombs) => {
         let cells = [];
@@ -184,7 +133,7 @@ const Board = () => {
                 newState[y][x].isChecked = true;
                 showAllBombs(newState);
                 setBoardState((prev) => {
-                    return { ...prev, cell: newState, status: "Вы проиграли!" };
+                    return { ...prev, cell: newState, status: "lose" };
                 });
             } else if (newState[y][x].num > 0 && newState[y][x].num < 9) {
                 newState[y][x].isChecked = true;
@@ -200,7 +149,7 @@ const Board = () => {
                 isAllBombsFlagged(newState)
             ) {
                 setBoardState((prev) => {
-                    return { ...prev, status: "Вы выиграли!" };
+                    return { ...prev, status: "win" };
                 });
             }
         }
@@ -236,7 +185,7 @@ const Board = () => {
         }
         if (isNonBombCellsChecked(newState) && isAllBombsFlagged(newState)) {
             setBoardState((prev) => {
-                return { ...prev, status: "Вы выиграли!" };
+                return { ...prev, status: "win" };
             });
         }
     };
@@ -292,83 +241,41 @@ const Board = () => {
         });
     };
 
-    return (
-        <div className="boardWrap">
-            <div className="row row-1">
-                <BombCount bombCount={boardState.bombCount} />
-                <div className="newGame" onClick={startNewGame}>
-                    {boardState?.status === "Вы проиграли!" ? (
-                        <img src={sadSmile} alt="" />
-                    ) : (
-                        <img src={happySmile} alt="" />
-                    )}
-                </div>
-                <div onClick={() => onModalOpen()} className="gear">
-                    <img src={gearIcon} alt="" />
-                </div>
-            </div>
+    const onChangeFieldSize = (option) => {
+        setBoardState((prev) => {
+            return {
+                ...prev,
+                count: option.count,
+                cell: createCells(option.count, option.bombs),
+                counter: 0,
+                status: "",
+                bombs: option.bombs,
+                bombCount: option.bombs,
+            };
+        });
+    };
 
-            <div className="row row-2">
-                <Timer
-                    status={boardState.status}
-                    setTime={setTime}
-                    time={time}
-                />
-            </div>
+    const randomInteger = (min, max) => {
+        return Math.round(min - 0.5 + Math.random() * (max - min + 1));
+    };
 
-            <div
-                className="board"
-                style={{
-                    gridTemplateColumns: `repeat(${boardState.count}, 25px)`,
-                    gridTemplateRows: `repeat(${boardState.count}, 25px)`,
-                }}
-            >
-                {[].concat(...boardState?.cell).map((item) => {
-                    return (
-                        <Cell
-                            key={item.key}
-                            y={item.y}
-                            x={item.x}
-                            num={item.num}
-                            isChecked={item.isChecked}
-                            updateItem={updateCells}
-                            rightClick={contextMenu}
-                            id={item.id}
-                            isFlag={item.isFlag}
-                        />
-                    );
-                })}
-            </div>
-            <WinModal
-                isOpen={winModalVisible}
-                onRequestClose={() => onWinModalClose()}
-            />
-            <LoseModal
-                isOpen={loseModalVisible}
-                onRequestClose={() => onLoseModalClose()}
-            />
-            <SettingsModal
-                isOpen={modalVisible}
-                onRequestClose={() => onModalClose()}
-                options={options}
-                onChangeFieldSize={onChangeFieldSize}
-            />
-        </div>
-    );
+    const random_bomb = (matrix, bombCount, fieldSize) => {
+        const xCoordinate = randomInteger(0, fieldSize - 1);
+        const yCoordinate = randomInteger(0, fieldSize - 1);
+        if (matrix[xCoordinate][yCoordinate].num !== 9) {
+            matrix[xCoordinate][yCoordinate].num = 9;
+            bombCount--;
+        }
+        return bombCount;
+    };
+
+    return {
+        boardState,
+        startNewGame,
+        updateCells,
+        contextMenu,
+        onChangeFieldSize,
+    };
 };
 
-const randomInteger = (min, max) => {
-    return Math.round(min - 0.5 + Math.random() * (max - min + 1));
-};
-
-const random_bomb = (matrix, bombCount, fieldSize) => {
-    const xCoordinate = randomInteger(0, fieldSize - 1);
-    const yCoordinate = randomInteger(0, fieldSize - 1);
-    if (matrix[xCoordinate][yCoordinate].num !== 9) {
-        matrix[xCoordinate][yCoordinate].num = 9;
-        bombCount--;
-    }
-    return bombCount;
-};
-
-export default Board;
+export default useBoard;

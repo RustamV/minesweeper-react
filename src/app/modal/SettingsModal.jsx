@@ -1,9 +1,9 @@
 import Modal from "react-modal";
 import React from "react";
-import CloseIcon from "../img/close.png";
-import SettingsImage from "../img/settings.png";
-import FieldSizeImage from "../img/field-size.png";
-import Select from "./Select";
+import CloseIcon from "../../img/close.png";
+import SettingsImage from "../../img/settings.png";
+import FieldSizeImage from "../../img/field-size.png";
+import Select from "../components/Select";
 
 const SettingsModal = ({
     onRequestClose,
