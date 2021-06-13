@@ -1,24 +1,20 @@
 import { components as ReactComponents } from "react-select";
 import React from "react";
+import { useAppContext } from "../helpers/functions/context";
 
-import select9 from "../../img/9-select.png";
-import select16 from "../../img/16-select.png";
-import select25 from "../../img/25-select.png";
+const Option = ({ children, type, ...props }) => {
+    const { imageTheme } = useAppContext();
 
-const Option = ({ children, ...props }) => {
     const getOptionImage = () => {
         switch (children) {
-            case "9": {
-                return select9;
-            }
             case "16": {
-                return select16;
+                return imageTheme?.select16;
             }
             case "25": {
-                return select25;
+                return imageTheme?.select25;
             }
             default: {
-                return select9;
+                return imageTheme?.select9;
             }
         }
     };
@@ -27,7 +23,7 @@ const Option = ({ children, ...props }) => {
 
     return (
         <ReactComponents.Option {...props}>
-            <img src={optionImage} alt="" />
+            {type === "size" ? <img src={optionImage} alt="" /> : children}
         </ReactComponents.Option>
     );
 };

@@ -1,8 +1,10 @@
 import Modal from "react-modal";
 import React from "react";
-import win from "../../img/win.png";
+import { useAppContext } from "../helpers/functions/context";
 
 const WinModal = ({ ...props }) => {
+    const { imageTheme } = useAppContext();
+
     return (
         <Modal
             className="win-modal modal"
@@ -11,7 +13,7 @@ const WinModal = ({ ...props }) => {
             {...props}
         >
             <div className="win-modal__image">
-                <img src={win} alt="" />
+                <img src={imageTheme?.win} alt="" />
             </div>
         </Modal>
     );

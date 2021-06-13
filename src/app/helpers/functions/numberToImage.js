@@ -1,49 +1,37 @@
-import zero from "../../../img/zero.png";
-import one from "../../../img/1.png";
-import two from "../../../img/2.png";
-import three from "../../../img/3.png";
-import four from "../../../img/4.png";
-import five from "../../../img/5.png";
-import six from "../../../img/6.png";
-import seven from "../../../img/7.png";
-import eight from "../../../img/8.png";
-import nine from "../../../img/9.png";
-import hyphen from "../../../img/hyphen.png";
-
-const numberToImage = (number) => {
+const numberToImage = (number, imageTheme) => {
     switch (number) {
         case 0: {
-            return zero;
+            return imageTheme?.zero;
         }
         case 1: {
-            return one;
+            return imageTheme?.one;
         }
         case 2: {
-            return two;
+            return imageTheme?.two;
         }
         case 3: {
-            return three;
+            return imageTheme?.three;
         }
         case 4: {
-            return four;
+            return imageTheme?.four;
         }
         case 5: {
-            return five;
+            return imageTheme?.five;
         }
         case 6: {
-            return six;
+            return imageTheme?.six;
         }
         case 7: {
-            return seven;
+            return imageTheme?.seven;
         }
         case 8: {
-            return eight;
+            return imageTheme?.eight;
         }
         case 9: {
-            return nine;
+            return imageTheme?.nine;
         }
         default:
-            return hyphen;
+            return imageTheme?.hyphen;
     }
 };
 
