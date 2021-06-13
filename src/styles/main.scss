@@ -7,7 +7,19 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #c5ccb8;
+    background-color: var(--third);
+}
+
+.theme-default {
+    --primary: #333343;
+    --secondary: #5d6872;
+    --third: #c5ccb8;
+}
+
+.theme-red {
+    --primary: #271d2c;
+    --secondary: #e01f3f;
+    --third: #fff8ed;
 }
 
 img {
@@ -15,14 +27,14 @@ img {
 }
 
 #root {
-    border: 10px solid #333343;
+    border: 10px solid var(--primary);
     border-radius: 20px;
 }
 
 .board{
     display: grid;
     position: relative;
-    border: 3px solid #333343;
+    border: 3px solid var(--primary);
 }
 .board .cell{
     display: flex;
@@ -54,7 +66,7 @@ img {
     justify-content: space-between;
     gap: 20px;
     padding: 20px;
-    border: 3px solid #5d6872;
+    border: 3px solid var(--secondary);
     border-radius: 8px;
 }
 
@@ -98,21 +110,21 @@ img {
 .select {
 
     .select__control {
-        border-color: #333343;
+        border-color: var(--primary);
         border-width: 3px;
-        background-color: #c5ccb8;
+        background-color: var(--third);
         box-shadow: none;
         min-height: unset;
         padding: 4px 7px;
         cursor: pointer;
 
         &:hover {
-            border-color: #333343;
+            border-color: var(--primary);
         }
     }
 
     .select__menu {
-        background-color: #c5ccb8;
+        background-color: var(--third);
     }
 
     .select__option {
@@ -122,17 +134,17 @@ img {
         cursor: pointer;
 
         &--is-selected {
-            background-color:  #c5ccb8;
+            background-color:  var(--third);
             filter: brightness(0.9);
         }
 
         &--is-focused {
-            background-color:  #c5ccb8;
+            background-color:  var(--third);
             filter: brightness(0.9);
         }
 
         &:active {
-            background-color:  #c5ccb8;
+            background-color:  var(--third);
         }
     }
 
@@ -156,43 +168,19 @@ img {
         padding: 0;
 
         &:hover {
-            color: #5d6872;
+            color: var(--secondary);
         }
     }
-}
-
-.modal {
-    //display: flex;
-    //justify-content: center;
-    //align-items: center;
-    //margin: 0;
-
-
-
-    //.rc-dialog-header {
-    //    background-color: #c5ccb8;
-    //    border-bottom: 1px solid #5d6872;
-    //}
-    //
-    //.rc-dialog-close {
-    //    opacity: 1;
-    //
-    //    &:hover {
-    //        opacity: 0.7;
-    //    }
-    //}
-
-
 }
 
 .settings-modal {
     width: 600px;
     height: 300px;
-    background-color: #c5ccb8;
+    background-color: var(--third);
     border-radius: 4px;
 
     &__header {
-        border-bottom: 1px solid #5d6872;
+        border-bottom: 1px solid var(--secondary);
         padding: 20px;
         display: flex;
         justify-content: space-between;

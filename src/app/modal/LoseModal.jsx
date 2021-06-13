@@ -1,8 +1,10 @@
 import Modal from "react-modal";
 import React from "react";
-import lose from "../../img/lose.png";
+import { useAppContext } from "../helpers/functions/context";
 
 const LoseModal = ({ ...props }) => {
+    const { imageTheme } = useAppContext();
+
     return (
         <Modal
             className="lose-modal modal"
@@ -11,7 +13,7 @@ const LoseModal = ({ ...props }) => {
             {...props}
         >
             <div className="lose-modal__image">
-                <img src={lose} alt="" />
+                <img src={imageTheme?.lose} alt="" />
             </div>
         </Modal>
     );

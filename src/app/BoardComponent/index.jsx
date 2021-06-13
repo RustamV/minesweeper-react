@@ -1,14 +1,11 @@
 import React from "react";
-import Cell from "./../components/Cell";
-import happySmile from "../../img/happySmile.png";
-import sadSmile from "../../img/sadSmile.png";
-import gearIcon from "../../img/gear.png";
+import Cell from "../components/Cell";
 import BombCount from "./../components/BombCount";
 import Timer from "./../components/Timer";
 import SettingsModal from "./../modal/SettingsModal";
 import WinModal from "./../modal/WinModal";
 import LoseModal from "./../modal/LoseModal";
-import sizeOptions from "../helpers/config/sizeOptions";
+import { useAppContext } from "../helpers/functions/context";
 
 const BoardComponent = ({
     boardState,
@@ -24,23 +21,26 @@ const BoardComponent = ({
     setSettingsModalVisible,
     setWinModalVisible,
     setLoseModalVisible,
+    onChangeTheme,
 }) => {
+    const { imageTheme } = useAppContext();
+
     return (
-        <div className="boardWrap">
+        <div className={`boardWrap`}>
             <div className="row row-1">
                 <BombCount bombCount={boardState.bombCount} />
                 <div className="newGame" onClick={startNewGame}>
                     {boardState?.status === "lose" ? (
-                        <img src={sadSmile} alt="" />
+                        <img src={imageTheme?.sadSmile} alt="" />
                     ) : (
-                        <img src={happySmile} alt="" />
+                        <img src={imageTheme?.happySmile} alt="" />
                     )}
                 </div>
                 <div
                     onClick={() => setSettingsModalVisible(true)}
                     className="gear"
                 >
-                    <img src={gearIcon} alt="" />
+                    <img src={imageTheme?.gear} alt="" />
                 </div>
             </div>
             <div className="row row-2">
@@ -84,8 +84,8 @@ const BoardComponent = ({
             <SettingsModal
                 isOpen={settingsModalVisible}
                 onRequestClose={() => setSettingsModalVisible(false)}
-                options={sizeOptions}
                 onChangeFieldSize={onChangeFieldSize}
+                onChangeTheme={onChangeTheme}
             />
         </div>
     );

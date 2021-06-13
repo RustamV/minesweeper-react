@@ -16,6 +16,7 @@ const Select = ({
     optionClassName,
     dropdownIndicatorIcon,
     size = "lg",
+
     ...props
 }) => {
     return (
@@ -26,9 +27,11 @@ const Select = ({
             classNamePrefix="select"
             components={{
                 IndicatorSeparator: () => null,
-                Option: (optionProps) => <Option {...optionProps} />,
+                Option: (optionProps) => (
+                    <Option {...optionProps} type={type} />
+                ),
                 SingleValue: (singleValueProps) => (
-                    <SingleValue {...singleValueProps} />
+                    <SingleValue {...singleValueProps} type={type} />
                 ),
                 ...components,
             }}

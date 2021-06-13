@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import numberToImage from "../helpers/functions/numberToImage";
+import { useAppContext } from "../helpers/functions/context";
 
-const Timer = ({ status, setTime, time }) => {
+const Timer = ({ status, setTime, time, theme }) => {
     const [date, setDate] = useState(new Date());
     const [gameStatus, setGameStatus] = useState("in-game");
+    const { imageTheme } = useAppContext();
 
     const tick = () => {
         if (gameStatus === "in-game") {
@@ -34,7 +36,7 @@ const Timer = ({ status, setTime, time }) => {
     }, [status]);
 
     const timeCountToNumber = (time) => {
-        return `${time}`.split("").map((i) => numberToImage(+i));
+        return `${time}`.split("").map((i) => numberToImage(+i, imageTheme));
     };
 
     return (
