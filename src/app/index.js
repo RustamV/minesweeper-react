@@ -14,15 +14,14 @@ const Board = () => {
     } = useBoard();
     const [time, setTime] = useState(0);
     const [settingsModalVisible, setSettingsModalVisible] = useState(false);
-    const [winModalVisible, setWinModalVisible] = useState(false);
-    const [loseModalVisible, setLoseModalVisible] = useState(false);
+    const [endModalVisible, setEndModalVisible] = useState(false);
     const [theme, setTheme] = useState("theme-default");
     const [imageTheme] = useImageTheme(theme);
 
     useEffect(() => {
         document.body.classList.add("theme-default");
-        boardState.status === "win" && setWinModalVisible(true);
-        boardState.status === "lose" && setLoseModalVisible(true);
+        (boardState.status === "win" || boardState.status === "lose") &&
+            setEndModalVisible(true);
     }, [boardState.status]);
 
     const onChangeTheme = ({ value }) => {
@@ -44,14 +43,12 @@ const Board = () => {
                 updateCells={updateCells}
                 contextMenu={contextMenu}
                 onChangeFieldSize={onChangeFieldSize}
-                winModalVisible={winModalVisible}
-                loseModalVisible={loseModalVisible}
+                endModalVisible={endModalVisible}
                 settingsModalVisible={settingsModalVisible}
                 time={time}
                 setTime={setTime}
                 setSettingsModalVisible={setSettingsModalVisible}
-                setWinModalVisible={setWinModalVisible}
-                setLoseModalVisible={setLoseModalVisible}
+                setEndModalVisible={setEndModalVisible}
                 onChangeTheme={onChangeTheme}
             />
         </AppWrapper>
