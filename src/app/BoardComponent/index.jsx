@@ -1,11 +1,7 @@
 import React from "react";
-import Cell from "../components/Cell";
-import BombCount from "./../components/BombCount";
-import Timer from "./../components/Timer";
-import SettingsModal from "./../modal/SettingsModal";
-import WinModal from "./../modal/WinModal";
-import LoseModal from "./../modal/LoseModal";
+import { Cell, BombCount, Timer, SettingsModal, EndModal } from "../components";
 import { useAppContext } from "../helpers/functions/context";
+import "./index.scss";
 
 const BoardComponent = ({
     boardState,
@@ -13,14 +9,12 @@ const BoardComponent = ({
     updateCells,
     contextMenu,
     onChangeFieldSize,
-    winModalVisible,
-    loseModalVisible,
+    endModalVisible,
     settingsModalVisible,
     time,
     setTime,
     setSettingsModalVisible,
-    setWinModalVisible,
-    setLoseModalVisible,
+    setEndModalVisible,
     onChangeTheme,
 }) => {
     const { imageTheme } = useAppContext();
@@ -31,9 +25,9 @@ const BoardComponent = ({
                 <BombCount bombCount={boardState.bombCount} />
                 <div className="newGame" onClick={startNewGame}>
                     {boardState?.status === "lose" ? (
-                        <img src={imageTheme?.sadSmile} alt="" />
+                        <img src={imageTheme?.sadFace} alt="" />
                     ) : (
-                        <img src={imageTheme?.happySmile} alt="" />
+                        <img src={imageTheme?.happyFace} alt="" />
                     )}
                 </div>
                 <div
@@ -73,13 +67,10 @@ const BoardComponent = ({
                     );
                 })}
             </div>
-            <WinModal
-                isOpen={winModalVisible}
-                onRequestClose={() => setWinModalVisible(false)}
-            />
-            <LoseModal
-                isOpen={loseModalVisible}
-                onRequestClose={() => setLoseModalVisible(false)}
+            <EndModal
+                status={boardState.status}
+                isOpen={endModalVisible}
+                onRequestClose={() => setEndModalVisible(false)}
             />
             <SettingsModal
                 isOpen={settingsModalVisible}

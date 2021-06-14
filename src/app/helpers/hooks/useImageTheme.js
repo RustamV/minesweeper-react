@@ -1,14 +1,24 @@
 import { useEffect, useState } from "react";
-import redTheme from "../../../img/red";
+import bloodTheme from "../../../img/blood";
 import defaultTheme from "../../../img/default";
+import skyTheme from "../../../img/sky";
+import sandTheme from "../../../img/sand";
 
 const useImageTheme = (theme) => {
     const [cellTheme, setCellTheme] = useState();
 
     useEffect(() => {
         switch (theme) {
-            case "theme-red": {
-                setCellTheme(redTheme);
+            case "theme-blood": {
+                setCellTheme(bloodTheme);
+                break;
+            }
+            case "theme-sky": {
+                setCellTheme(skyTheme);
+                break;
+            }
+            case "theme-sand": {
+                setCellTheme(sandTheme);
                 break;
             }
             default: {
