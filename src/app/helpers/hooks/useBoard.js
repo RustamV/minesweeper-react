@@ -8,6 +8,7 @@ const useBoard = () => {
         status: "",
         counter: 0,
         bombCount: 10,
+        gameStatus: "not-started", // not-started, started, stopped
     });
 
     useEffect(() => {
@@ -127,13 +128,23 @@ const useBoard = () => {
     };
 
     const updateCells = (y, x) => {
+        if (boardState.gameStatus === "not-started") {
+            setBoardState((prev) => {
+                return { ...prev, gameStatus: "started" };
+            });
+        }
         if (!boardState.cell[y][x].isChecked && !boardState.cell[y][x].isFlag) {
             let newState = boardState.cell;
             if (newState[y][x].num > 8) {
                 newState[y][x].isChecked = true;
                 showAllBombs(newState);
                 setBoardState((prev) => {
-                    return { ...prev, cell: newState, status: "lose" };
+                    return {
+                        ...prev,
+                        cell: newState,
+                        status: "lose",
+                        gameStatus: "stopped",
+                    };
                 });
             } else if (newState[y][x].num > 0 && newState[y][x].num < 9) {
                 newState[y][x].isChecked = true;
@@ -149,13 +160,22 @@ const useBoard = () => {
                 isAllBombsFlagged(newState)
             ) {
                 setBoardState((prev) => {
-                    return { ...prev, status: "win" };
+                    return {
+                        ...prev,
+                        status: "win",
+                        gameStatus: "stopped",
+                    };
                 });
             }
         }
     };
 
     const contextMenu = (y, x) => {
+        if (boardState.gameStatus === "not-started") {
+            setBoardState((prev) => {
+                return { ...prev, gameStatus: "started" };
+            });
+        }
         let newState = boardState.cell;
         if (boardState.cell[y][x].isFlag) {
             newState[y][x].isFlag = false;
@@ -185,7 +205,7 @@ const useBoard = () => {
         }
         if (isNonBombCellsChecked(newState) && isAllBombsFlagged(newState)) {
             setBoardState((prev) => {
-                return { ...prev, status: "win" };
+                return { ...prev, status: "win", gameStatus: "stopped" };
             });
         }
     };
@@ -237,6 +257,7 @@ const useBoard = () => {
                 counter: 0,
                 status: "",
                 bombCount: boardState.bombs,
+                gameStatus: "not-started",
             };
         });
     };

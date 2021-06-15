@@ -2,13 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useAppContext } from "../../helpers/functions/context";
 import "./index.scss";
 
-const Timer = ({ status, setTime, time }) => {
+const Timer = ({ setTime, time, gameStatus }) => {
     const [date, setDate] = useState(new Date());
-    const [gameStatus, setGameStatus] = useState("in-game");
     const { imageTheme } = useAppContext();
 
     const tick = () => {
-        if (gameStatus === "in-game") {
+        if (gameStatus === "started") {
             setTime((prev) => ++prev);
         }
         setDate(new Date());
@@ -20,20 +19,13 @@ const Timer = ({ status, setTime, time }) => {
         return () => {
             clearTimeout(timerID);
         };
-    }, [date]);
+    }, [date, gameStatus]);
 
     useEffect(() => {
-        if (status === "" && gameStatus === "in-game") {
+        if (gameStatus === "started" || gameStatus === "not-started") {
             setTime(0);
         }
-        if (status === "lose" || status === "win") {
-            setGameStatus("stopped");
-        }
-        if (status === "in-game" && gameStatus === "stopped") {
-            setTime(0);
-            setGameStatus("in-game");
-        }
-    }, [status]);
+    }, [gameStatus]);
 
     return (
         <div className="time-counter">

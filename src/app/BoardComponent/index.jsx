@@ -24,11 +24,14 @@ const BoardComponent = ({
             <div className="row row-1">
                 <BombCount bombCount={boardState.bombCount} />
                 <div className="newGame" onClick={startNewGame}>
-                    {boardState?.status === "lose" ? (
-                        <img src={imageTheme?.sadFace} alt="" />
-                    ) : (
-                        <img src={imageTheme?.happyFace} alt="" />
-                    )}
+                    <img
+                        src={
+                            boardState?.status === "lose"
+                                ? imageTheme?.sadFace
+                                : imageTheme?.happyFace
+                        }
+                        alt=""
+                    />
                 </div>
                 <div
                     onClick={() => setSettingsModalVisible(true)}
@@ -39,7 +42,7 @@ const BoardComponent = ({
             </div>
             <div className="row row-2">
                 <Timer
-                    status={boardState.status}
+                    gameStatus={boardState.gameStatus}
                     setTime={setTime}
                     time={time}
                 />
