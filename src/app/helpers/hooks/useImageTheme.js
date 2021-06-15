@@ -3,6 +3,7 @@ import bloodTheme from "../../../img/blood";
 import defaultTheme from "../../../img/default";
 import skyTheme from "../../../img/sky";
 import sandTheme from "../../../img/sand";
+import deathTheme from "../../../img/death";
 
 const useImageTheme = (theme) => {
     const [cellTheme, setCellTheme] = useState();
@@ -19,6 +20,10 @@ const useImageTheme = (theme) => {
             }
             case "theme-sand": {
                 setCellTheme(sandTheme);
+                break;
+            }
+            case "theme-death": {
+                setCellTheme(deathTheme);
                 break;
             }
             default: {
