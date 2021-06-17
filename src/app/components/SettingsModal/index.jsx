@@ -4,6 +4,7 @@ import { Select } from "..";
 import { sizeOptions, themeOptions } from "../../helpers/config";
 import { useAppContext } from "../../helpers/functions/context";
 import "./index.scss";
+import { useGameTheme } from "../../helpers/hooks";
 
 const SettingsModal = ({
     onRequestClose,
@@ -12,7 +13,7 @@ const SettingsModal = ({
     ...props
 }) => {
     const { imageTheme } = useAppContext();
-
+    const [theme] = useGameTheme();
     return (
         <Modal
             className="modal settings-modal"
@@ -48,10 +49,11 @@ const SettingsModal = ({
                 <div className="settings-modal__field">
                     <span className="settings-modal__text text">Theme</span>
                     <Select
-                        defaultValue={themeOptions[0]}
+                        // defaultValue={themeOptions[0]}
                         options={themeOptions}
                         onChange={(option) => onChangeTheme(option)}
                         className="select"
+                        defaultValue={theme}
                     />
                 </div>
             </div>

@@ -20,13 +20,13 @@ const BoardComponent = ({
     const { imageTheme } = useAppContext();
 
     return (
-        <div className={`boardWrap`}>
+        <div className="boardWrap">
             <div className="row row-1">
-                <BombCount bombCount={boardState.bombCount} />
+                <BombCount minesToDefuse={boardState.minesToDefuse} />
                 <div className="newGame" onClick={startNewGame}>
                     <img
                         src={
-                            boardState?.status === "lose"
+                            boardState?.gameResult === "lose"
                                 ? imageTheme?.sadFace
                                 : imageTheme?.happyFace
                         }
@@ -50,11 +50,11 @@ const BoardComponent = ({
             <div
                 className="board"
                 style={{
-                    gridTemplateColumns: `repeat(${boardState.count}, 25px)`,
-                    gridTemplateRows: `repeat(${boardState.count}, 25px)`,
+                    gridTemplateColumns: `repeat(${boardState.fieldSize}, ${boardState.cellSize})`,
+                    gridTemplateRows: `repeat(${boardState.fieldSize}, ${boardState.cellSize})`,
                 }}
             >
-                {[].concat(...boardState?.cell).map((item) => {
+                {[].concat(...boardState?.cells).map((item) => {
                     return (
                         <Cell
                             key={item.key}
@@ -71,7 +71,7 @@ const BoardComponent = ({
                 })}
             </div>
             <EndModal
-                status={boardState.status}
+                status={boardState.gameResult}
                 isOpen={endModalVisible}
                 onRequestClose={() => setEndModalVisible(false)}
             />
