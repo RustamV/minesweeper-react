@@ -9,7 +9,7 @@ const useImageTheme = (theme) => {
     const [cellTheme, setCellTheme] = useState();
 
     useEffect(() => {
-        switch (theme) {
+        switch (theme.value) {
             case "theme-blood": {
                 setCellTheme(bloodTheme);
                 break;

@@ -34,6 +34,7 @@ const Timer = ({ setTime, time, gameStatus }) => {
                     <div
                         className={`cell cell--other checked`}
                         data-cell={item}
+                        key={Math.random()}
                     >
                         <img src={imageTheme?.empty} key={index} alt="" />
                     </div>

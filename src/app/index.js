@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { AppWrapper } from "./helpers/functions/context";
-import useBoard from "./helpers/hooks/useBoard";
 import BoardComponent from "./BoardComponent";
-import useImageTheme from "./helpers/hooks/useImageTheme";
+import { useBoard, useGameTheme } from "./helpers/hooks";
 
 const Board = () => {
     const {
@@ -15,20 +14,12 @@ const Board = () => {
     const [time, setTime] = useState(0);
     const [settingsModalVisible, setSettingsModalVisible] = useState(false);
     const [endModalVisible, setEndModalVisible] = useState(false);
-    const [theme, setTheme] = useState("theme-default");
-    const [imageTheme] = useImageTheme(theme);
+    const [theme, imageTheme, onChangeTheme] = useGameTheme();
 
     useEffect(() => {
-        document.body.classList.add("theme-default");
-        (boardState.status === "win" || boardState.status === "lose") &&
+        (boardState.gameResult === "win" || boardState.gameResult === "lose") &&
             setEndModalVisible(true);
-    }, [boardState.status]);
-
-    const onChangeTheme = ({ value }) => {
-        document.body.className = "";
-        document.body.classList.add(value);
-        setTheme(value);
-    };
+    }, [boardState.gameResult]);
 
     return (
         <AppWrapper
