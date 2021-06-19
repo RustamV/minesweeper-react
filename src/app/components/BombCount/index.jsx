@@ -7,6 +7,9 @@ const BombCount = ({ minesToDefuse }) => {
 
     return (
         <div className="bomb-counter">
+            <div className={`cell cell--other checked`}>
+                <img src={imageTheme?.mine} alt="" />
+            </div>
             {`${minesToDefuse}`.split("").map((item, index) => {
                 return (
                     <div

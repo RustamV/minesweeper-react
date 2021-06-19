@@ -1,5 +1,12 @@
 import React from "react";
-import { Cell, BombCount, Timer, SettingsModal, EndModal } from "../components";
+import {
+    Cell,
+    BombCount,
+    Timer,
+    SettingsModal,
+    EndModal,
+    StatsModal,
+} from "../components";
 import { useAppContext } from "../helpers/functions/context";
 import "./index.scss";
 
@@ -16,12 +23,14 @@ const BoardComponent = ({
     setSettingsModalVisible,
     setEndModalVisible,
     onChangeTheme,
+    setStatsModalVisible,
+    statsModalVisible,
 }) => {
     const { imageTheme } = useAppContext();
 
     return (
         <div className="boardWrap">
-            <div className="row row-1">
+            <div className="row-1">
                 <BombCount minesToDefuse={boardState.minesToDefuse} />
                 <div className="newGame" onClick={startNewGame}>
                     <img
@@ -40,7 +49,8 @@ const BoardComponent = ({
                     <img src={imageTheme?.gear} alt="" />
                 </div>
             </div>
-            <div className="row row-2">
+            <div className="row-2">
+                <span className="timer text">Timer:</span>
                 <Timer
                     gameStatus={boardState.gameStatus}
                     setTime={setTime}
@@ -80,6 +90,12 @@ const BoardComponent = ({
                 onRequestClose={() => setSettingsModalVisible(false)}
                 onChangeFieldSize={onChangeFieldSize}
                 onChangeTheme={onChangeTheme}
+                setStatsModalVisible={setStatsModalVisible}
+            />
+            <StatsModal
+                isOpen={statsModalVisible}
+                onRequestClose={() => setStatsModalVisible(false)}
+                setSettingsModalVisible={setSettingsModalVisible}
             />
         </div>
     );

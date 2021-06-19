@@ -10,22 +10,30 @@ const SettingsModal = ({
     onRequestClose,
     onChangeFieldSize,
     onChangeTheme,
+    setSettingsModalVisible,
+    setStatsModalVisible,
     ...props
 }) => {
     const { imageTheme } = useAppContext();
     const [theme] = useGameTheme();
+
+    const handleStatisticsClick = () => {
+        onRequestClose();
+        setStatsModalVisible(true);
+    };
+
     return (
         <Modal
-            className="modal settings-modal"
+            className="settings-modal modal"
             overlayClassName="modal__overlay"
             ariaHideApp={false}
             onRequestClose={onRequestClose}
             {...props}
         >
-            <div className="settings-modal__header">
-                <h2 className="settings-modal__title text">Settings</h2>
+            <div className="modal__header">
+                <h2 className="modal__title text">Settings</h2>
 
-                <div className="settings-modal__close">
+                <div className="modal__close">
                     <img
                         src={imageTheme?.close}
                         onClick={onRequestClose}
@@ -33,28 +41,29 @@ const SettingsModal = ({
                     />
                 </div>
             </div>
-            <div className="settings-modal__content">
-                <div className="settings-modal__field">
-                    <span className="settings-modal__text text">
-                        Field size
-                    </span>
+            <div className="modal__content">
+                <div className="modal__field">
+                    <span className="modal__text text">Field size</span>
                     <Select
                         defaultValue={sizeOptions[0]}
                         options={sizeOptions}
                         onChange={(option) => onChangeFieldSize(option)}
                         className="select"
-                        type={"size"}
                     />
                 </div>
-                <div className="settings-modal__field">
-                    <span className="settings-modal__text text">Theme</span>
+                <div className="modal__field">
+                    <span className="modal__text text">Theme</span>
                     <Select
-                        // defaultValue={themeOptions[0]}
                         options={themeOptions}
                         onChange={(option) => onChangeTheme(option)}
                         className="select"
                         defaultValue={theme}
                     />
+                </div>
+                <div className="modal__field">
+                    <button className="button" onClick={handleStatisticsClick}>
+                        Statistics
+                    </button>
                 </div>
             </div>
         </Modal>
