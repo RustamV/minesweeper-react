@@ -29,7 +29,16 @@ img {
     color: var(--secondary);
 }
 
-
+.button {
+    padding: 10px 80px;
+    font-size: 24px;
+    font-family: 'UpheavalPro';
+    color: var(--secondary);
+    border: 3px solid var(--secondary);
+    border-radius: 4px;
+    background-color: var(--third);
+    cursor: pointer;
+}
 
 .newGame {
     cursor: pointer;
@@ -51,18 +60,24 @@ img {
     border-radius: 8px;
 }
 
-.row {
+.row-1 {
     display: grid;
     width: 100%;
+    align-items: center;
+    grid-template-columns: 1fr 1fr 1fr;
 
-    &-1 {
-        align-items: center;
-        grid-template-columns: 1fr 1fr 1fr;
-    }
+}
 
-    &-2 {
-        justify-content: center ;
-    }
+.row-2 {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.timer {
+    font-size: 22px;
+    color: var(--primary);
 }
 
 .modal {
@@ -99,6 +114,71 @@ img {
 
     &:focus-visible {
         outline: none;
+    }
+
+    &__title {
+        font-size: 44px;
+        font-weight: 400;
+    }
+
+    &__text {
+        font-size: 36px;
+    }
+
+    &__header {
+        border-bottom: 1px solid var(--secondary);
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__content {
+        padding: 20px;
+    }
+
+    &__field {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+    }
+
+    &__close {
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    &__table {
+        width: 100%;
+        color: var(--secondary);
+
+
+
+        tr {
+            td, th {
+                text-align: center;
+                font-weight: 400;
+            }
+
+            td:first-child, th:first-child {
+                text-align: left;
+            }
+
+            td:last-child, th:last-child {
+                text-align: right;
+            }
+        }
+
+
+    }
+
+    &__table-title {
+        margin-bottom: 8px;
+        font-weight: 400;
     }
 }
 

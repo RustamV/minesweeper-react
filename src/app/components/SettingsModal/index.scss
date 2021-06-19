@@ -1,42 +1,8 @@
-.settings-modal {
+.settings-modal, .stats-modal {
   width: 600px;
-  height: 300px;
+  height: 360px;
   background-color: var(--third);
   border-radius: 4px;
 
-  &__title {
-    font-size: 44px;
-    font-weight: 400;
-  }
 
-  &__text {
-    font-size: 36px;
-  }
-
-  &__header {
-    border-bottom: 1px solid var(--secondary);
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  &__content {
-    padding: 20px;
-  }
-
-  &__field {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-  }
-
-  &__close {
-    cursor: pointer;
-
-    &:hover {
-      opacity: 0.8;
-    }
-  }
 }

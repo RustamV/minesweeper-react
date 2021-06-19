@@ -4,3 +4,4 @@ export { default as Select } from "./Select";
 export { default as BombCount } from "./BombCount";
 export { default as EndModal } from "./EndModal";
 export { default as SettingsModal } from "./SettingsModal";
+export { default as StatsModal } from "./StatsModal";
