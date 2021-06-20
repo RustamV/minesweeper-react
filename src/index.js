@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./styles/index.css";
 import Board from "./app";
+import "./i18n";
+import "./styles/index.css";
 import "./styles/main.scss";
 
 Storage.prototype.setObj = function (key, obj) {

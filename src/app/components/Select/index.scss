@@ -24,18 +24,14 @@
     justify-content: center;
     cursor: pointer;
 
-    &--is-selected {
+    &--is-selected, &--is-focused {
       background-color:  var(--secondary);
-      filter: brightness(0.9);
-    }
-
-    &--is-focused {
-      background-color:  var(--secondary);
+      color: var(--third);
       filter: brightness(0.9);
     }
 
     &:active {
-      background-color:  var(--secondary);
+      background-color:  var(--third);
     }
 
     &:hover {
@@ -56,11 +52,7 @@
   }
 
   .select__indicator {
-    color: #333343;
+    color: var(--primary);
     padding: 0;
-
-    &:hover {
-      color: var(--third);
-    }
   }
 }

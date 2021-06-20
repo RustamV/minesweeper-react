@@ -9,6 +9,7 @@ import {
 } from "../components";
 import { useAppContext } from "../helpers/functions/context";
 import "./index.scss";
+import { useTranslation } from "react-i18next";
 
 const BoardComponent = ({
     boardState,
@@ -27,6 +28,7 @@ const BoardComponent = ({
     statsModalVisible,
 }) => {
     const { imageTheme } = useAppContext();
+    const { t } = useTranslation("app");
 
     return (
         <div className="boardWrap">
@@ -50,7 +52,7 @@ const BoardComponent = ({
                 </div>
             </div>
             <div className="row-2">
-                <span className="timer text">Timer:</span>
+                <span className="timer text">{t("timer")}</span>
                 <Timer
                     gameStatus={boardState.gameStatus}
                     setTime={setTime}

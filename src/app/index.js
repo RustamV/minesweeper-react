@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { AppWrapper } from "./helpers/functions/context";
 import BoardComponent from "./BoardComponent";
 import { useBoard, useGameTheme, useStats } from "./helpers/hooks";
+import { useTranslation } from "react-i18next";
 
 const Board = () => {
+    const { i18n } = useTranslation("app");
     const {
         boardState,
         startNewGame,
@@ -19,6 +21,10 @@ const Board = () => {
     const { statistics, addRecordToStorage } = useStats();
 
     useEffect(() => {
+        i18n.changeLanguage(localStorage.getItem("language"));
+    }, []);
+
+    useEffect(() => {
         const { gameResult } = boardState;
         if (gameResult === "win" || gameResult === "lose") {
             setEndModalVisible(true);
@@ -31,6 +37,7 @@ const Board = () => {
             sharedState={{
                 imageTheme,
                 statistics,
+                fieldSize: boardState.fieldSize,
             }}
         >
             <BoardComponent

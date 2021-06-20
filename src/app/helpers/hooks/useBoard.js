@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { sizeOptions } from "../config";
-import { getRandomInteger } from "../functions";
+import { getRandomInteger, findFieldSize } from "../functions";
 
 const useBoard = () => {
     const [boardState, setBoardState] = useState({
@@ -15,9 +15,11 @@ const useBoard = () => {
     });
 
     useEffect(() => {
-        const newFieldSize = sizeOptions[0].fieldSize;
-        const newMinesCount = sizeOptions[0].mines;
-        const newCellSize = sizeOptions[0].cellSize;
+        const currentSizeOption =
+            findFieldSize(+localStorage.getItem("size")) ?? sizeOptions[0];
+        const newFieldSize = currentSizeOption.fieldSize;
+        const newMinesCount = currentSizeOption.mines;
+        const newCellSize = currentSizeOption.cellSize;
 
         setBoardState((prev) => {
             return {
@@ -273,6 +275,7 @@ const useBoard = () => {
                 cellSize: option.cellSize,
             };
         });
+        localStorage.setItem("size", option.fieldSize);
     };
 
     const placeMineAtBoard = (matrix, minesToDefuse, fieldSize) => {
