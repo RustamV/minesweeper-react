@@ -1,10 +1,12 @@
 import Modal from "react-modal";
 import React from "react";
 import { Select } from "..";
-import { sizeOptions, themeOptions } from "../../helpers/config";
+import { sizeOptions, GetThemeOptions } from "../../helpers/config";
 import { useAppContext } from "../../helpers/functions/context";
+import { useGameTheme, useLanguage } from "../../helpers/hooks";
+import { useTranslation } from "react-i18next";
+import { findFieldSize } from "../../helpers/functions";
 import "./index.scss";
-import { useGameTheme } from "../../helpers/hooks";
 
 const SettingsModal = ({
     onRequestClose,
@@ -14,8 +16,15 @@ const SettingsModal = ({
     setStatsModalVisible,
     ...props
 }) => {
-    const { imageTheme } = useAppContext();
+    const { imageTheme, fieldSize } = useAppContext();
     const [theme] = useGameTheme();
+    const { t } = useTranslation("app");
+    const themeOptions = GetThemeOptions();
+    const {
+        currentLanguage,
+        languageOptions,
+        onChangeLanguage,
+    } = useLanguage();
 
     const handleStatisticsClick = () => {
         onRequestClose();
@@ -31,7 +40,7 @@ const SettingsModal = ({
             {...props}
         >
             <div className="modal__header">
-                <h2 className="modal__title text">Settings</h2>
+                <h2 className="modal__title text">{t("settings")}</h2>
 
                 <div className="modal__close">
                     <img
@@ -43,26 +52,38 @@ const SettingsModal = ({
             </div>
             <div className="modal__content">
                 <div className="modal__field">
-                    <span className="modal__text text">Field size</span>
+                    <span className="modal__text text">{t("fieldSize")}</span>
                     <Select
-                        defaultValue={sizeOptions[0]}
+                        defaultValue={findFieldSize(fieldSize)}
+                        value={findFieldSize(fieldSize)}
                         options={sizeOptions}
                         onChange={(option) => onChangeFieldSize(option)}
                         className="select"
                     />
                 </div>
                 <div className="modal__field">
-                    <span className="modal__text text">Theme</span>
+                    <span className="modal__text text">{t("theme")}</span>
                     <Select
                         options={themeOptions}
                         onChange={(option) => onChangeTheme(option)}
                         className="select"
                         defaultValue={theme}
+                        value={theme}
+                    />
+                </div>
+                <div className="modal__field">
+                    <span className="modal__text text">{t("language")}</span>
+                    <Select
+                        options={languageOptions}
+                        onChange={(option) => onChangeLanguage(option)}
+                        className="select"
+                        defaultValue={currentLanguage}
+                        value={currentLanguage}
                     />
                 </div>
                 <div className="modal__field">
                     <button className="button" onClick={handleStatisticsClick}>
-                        Statistics
+                        {t("statistics")}
                     </button>
                 </div>
             </div>
