@@ -47,6 +47,11 @@ img {
 
 .gear {
     justify-self: end;
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.8;
+    }
 }
 
 .boardWrap {
