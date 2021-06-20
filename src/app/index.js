@@ -17,7 +17,7 @@ const Board = () => {
     const [settingsModalVisible, setSettingsModalVisible] = useState(false);
     const [statsModalVisible, setStatsModalVisible] = useState(false);
     const [endModalVisible, setEndModalVisible] = useState(false);
-    const [theme, imageTheme, onChangeTheme] = useGameTheme();
+    const { theme, imageTheme, onChangeTheme } = useGameTheme();
     const { statistics, addRecordToStorage } = useStats();
 
     useEffect(() => {
@@ -35,6 +35,7 @@ const Board = () => {
     return (
         <AppWrapper
             sharedState={{
+                theme,
                 imageTheme,
                 statistics,
                 fieldSize: boardState.fieldSize,

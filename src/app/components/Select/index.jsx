@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { default as ReactSelect } from "react-select";
 import "./index.scss";
 
