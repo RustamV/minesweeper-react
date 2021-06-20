@@ -1,9 +1,9 @@
 import Modal from "react-modal";
-import React from "react";
+import React, { useEffect } from "react";
 import { Select } from "..";
 import { sizeOptions, GetThemeOptions } from "../../helpers/config";
 import { useAppContext } from "../../helpers/functions/context";
-import { useGameTheme, useLanguage } from "../../helpers/hooks";
+import { useLanguage } from "../../helpers/hooks";
 import { useTranslation } from "react-i18next";
 import { findFieldSize } from "../../helpers/functions";
 import "./index.scss";
@@ -16,8 +16,7 @@ const SettingsModal = ({
     setStatsModalVisible,
     ...props
 }) => {
-    const { imageTheme, fieldSize } = useAppContext();
-    const [theme] = useGameTheme();
+    const { theme, imageTheme, fieldSize } = useAppContext();
     const { t } = useTranslation("app");
     const themeOptions = GetThemeOptions();
     const {

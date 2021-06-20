@@ -27,7 +27,7 @@ const useGameTheme = () => {
         localStorage.setItem("theme", value);
     };
 
-    return [theme, imageTheme, onChangeTheme];
+    return { theme, imageTheme, onChangeTheme };
 };
 
 export default useGameTheme;
