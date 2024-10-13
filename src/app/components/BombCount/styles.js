@@ -1,0 +1,1 @@
+const BombCounterStyled = styled.div``;

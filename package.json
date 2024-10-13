@@ -4,17 +4,14 @@
   "private": true,
   "homepage": "http://rustamv.github.io/minesweeper-react",
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
     "i18next": "^20.3.2",
-    "node-sass": "^4.13.1",
     "rc-dialog": "^8.5.2",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-i18next": "^11.11.0",
     "react-modal": "^3.13.1",
-    "react-scripts": "3.3.1"
+    "react-scripts": "3.3.1",
+    "styled-components": "^6.1.13"
   },
   "scripts": {
     "start": "react-scripts start",

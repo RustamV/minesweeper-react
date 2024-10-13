@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useAppContext } from "../../helpers/functions/context";
-import "./index.scss";
+import { StyledCell } from "./styles";
 
 export const Cell = ({
     rightClick,
@@ -20,7 +20,7 @@ export const Cell = ({
             else setCell(imageTheme?.empty);
         } else if (isFlag) setCell(imageTheme?.flag);
         else setCell(imageTheme?.cell);
-    }, [isChecked, isFlag, imageTheme]);
+    }, [isChecked, isFlag, imageTheme, num]);
 
     const contextMenu = (e) => {
         e.preventDefault();
@@ -28,14 +28,14 @@ export const Cell = ({
     };
 
     return (
-        <div
-            className={`cell ${isChecked && "checked"}`}
+        <StyledCell
+            checked={isChecked}
             onClick={() => updateItem(x, y)}
             onContextMenu={contextMenu}
             data-cell={isChecked && num < 9 ? num : ""}
         >
             <img src={cell} alt="" />
-        </div>
+        </StyledCell>
     );
 };
 

@@ -1,0 +1,34 @@
+import { styled, css } from "styled-components";
+
+const StyledCell = styled.div`
+    cursor: pointer;
+    position: relative;
+
+    ${({ checked }) =>
+        checked &&
+        css`
+            cursor: initial;
+        `}
+    ${({ other }) =>
+        other &&
+        css`
+            width: 25px;
+            height: 25px;
+        `}
+
+  &:before {
+        content: attr(data-cell);
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: "UpheavalPro";
+        font-size: 22px;
+        line-height: 21px;
+        color: var(--primary);
+    }
+`;
+
+export { StyledCell };
